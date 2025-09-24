@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Andr_Dev</string>
+    <string name="rules_html"><![CDATA[
+        <h2>Правила игры</h2>
+        <p>правила игры.</p>
+    ]]></string>
+</resources>
