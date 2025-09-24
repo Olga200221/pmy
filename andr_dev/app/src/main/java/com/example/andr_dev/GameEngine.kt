@@ -1,4 +1,8 @@
 package com.example.andr_dev
 
-class GameEngine {
-}
+data class GameSettings(
+    val spawnInterval: Long,
+    val maxBugs: Int,
+    val bonusInterval: Long,
+    val roundTime: Long
+)

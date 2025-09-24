@@ -1,10 +1,20 @@
 package com.example.andr_dev
 
 import android.content.Context
-import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 
-class BugView(context: Context) : ImageView(context) {
+enum class BugRarity(val scoreMultiplier: Int) {
+    COMMON(1),
+    UNCOMMON(2),
+    RARE(3),
+    EPIC(5),
+    LEGENDARY(10),
+    MYTHIC(20),
+    UNIQUE(50)
+}
+
+class BugView(context: Context, drawableRes: Int, val scoreValue: Int) : AppCompatImageView(context) {
     init {
-        setImageResource(R.drawable.bug) // картинка насекомого (нужно добавить bug.png в drawable)
+        setImageResource(drawableRes)
     }
 }

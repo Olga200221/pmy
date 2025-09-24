@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvMaxCockroaches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Макс. жуков: 5" />
+
+    <SeekBar
+        android:id="@+id/sbMaxCockroaches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:max="10"
+        android:progress="5" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Скорость игры:" />
+    <TextView
+        android:id="@+id/tvSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Скорость: 3 (1-7 сек)" />
 
-        <SeekBar
-            android:id="@+id/sbSpeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="10" />
+    <SeekBar
+        android:id="@+id/sbSpeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"
+        android:progress="3" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Максимальное количество тараканов:" />
+    <TextView
+        android:id="@+id/tvBonusInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Интервал бонусов: 5 сек" />
 
-        <SeekBar
-            android:id="@+id/sbMaxCockroaches"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="50" />
+    <SeekBar
+        android:id="@+id/sbBonusInterval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="9"
+        android:progress="4" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Интервал появления бонусов (сек):" />
+    <TextView
+        android:id="@+id/tvRoundDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Длительность: 60 сек" />
 
-        <SeekBar
-            android:id="@+id/sbBonusInterval"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="60" />
+    <SeekBar
+        android:id="@+id/sbRoundDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="6"
+        android:progress="0" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Длительность раунда (сек):" />
-
-        <SeekBar
-            android:id="@+id/sbRoundDuration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="300" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
