@@ -10,7 +10,7 @@ enum class BugRarity(val scoreMultiplier: Int) {
     EPIC(5),
     LEGENDARY(10),
     MYTHIC(20),
-    UNIQUE(50)
+    UNIQUE(30)
 }
 
 class BugView(context: Context, drawableRes: Int, val scoreValue: Int) : AppCompatImageView(context) {

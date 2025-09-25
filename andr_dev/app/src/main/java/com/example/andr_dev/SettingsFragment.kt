@@ -32,7 +32,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sbRoundDuration = view.findViewById(R.id.sbRoundDuration)
         tvRoundDuration = view.findViewById(R.id.tvRoundDuration)
 
-        // Загрузка сохраненных значений или значения по умолчанию
+
         val defaultMaxBugs = 5
         val defaultSpeed = 3000L
         val defaultBonusInterval = 5000L
@@ -42,7 +42,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sbBonusInterval.progress = ((sharedPreferences.getLong("bonusInterval", defaultBonusInterval) / 1000).toInt() - 1)
         sbRoundDuration.progress = ((sharedPreferences.getLong("gameDuration", defaultDuration) / 10000).toInt() - 6)
 
-        // Обновление текста и сохранение значений при изменении
+
         sbMaxCockroaches.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 tvMaxCockroaches.text = "Макс. жуков: $progress"
@@ -64,7 +64,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         sbBonusInterval.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val interval = (progress + 1) * 1000L // 1000-10000 мс
+                val interval = (progress + 1) * 1000L
                 tvBonusInterval.text = "Интервал бонусов: ${interval / 1000} сек"
                 sharedPreferences.edit().putLong("bonusInterval", interval).apply()
             }
@@ -74,7 +74,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         sbRoundDuration.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val duration = (progress + 6) * 10000L // 60000-120000 мс
+                val duration = (progress + 6) * 10000L
                 tvRoundDuration.text = "Длительность: ${duration / 1000} сек"
                 sharedPreferences.edit().putLong("gameDuration", duration).apply()
             }
@@ -82,7 +82,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        // Инициализация текста
+
         tvMaxCockroaches.text = "Макс. жуков: ${sbMaxCockroaches.progress}"
         tvSpeed.text = "Скорость: ${sbSpeed.progress} сек"
         tvBonusInterval.text = "Интервал бонусов: ${sbBonusInterval.progress + 1} сек"
