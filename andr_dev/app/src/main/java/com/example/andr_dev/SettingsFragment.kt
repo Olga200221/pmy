@@ -32,17 +32,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         sbRoundDuration = view.findViewById(R.id.sbRoundDuration)
         tvRoundDuration = view.findViewById(R.id.tvRoundDuration)
 
-
+        // Загрузка сохраненных значений или значения по умолчанию
         val defaultMaxBugs = 5
-        val defaultSpeed = 3000L
+        val defaultSpeed = 3000L // Средняя скорость (3 сек)
         val defaultBonusInterval = 5000L
         val defaultDuration = 60000L
         sbMaxCockroaches.progress = sharedPreferences.getInt("maxBugs", defaultMaxBugs)
-        sbSpeed.progress = ((10000L - sharedPreferences.getLong("bugSpeed", defaultSpeed)) / 1000).toInt()
-        sbBonusInterval.progress = ((sharedPreferences.getLong("bonusInterval", defaultBonusInterval) / 1000).toInt() - 1)
-        sbRoundDuration.progress = ((sharedPreferences.getLong("gameDuration", defaultDuration) / 10000).toInt() - 6)
+        sbSpeed.progress = ((10000L - sharedPreferences.getLong("bugSpeed", defaultSpeed)) / 1000).toInt() // Маппинг 10000->0, 1000->10
+        sbBonusInterval.progress = ((sharedPreferences.getLong("bonusInterval", defaultBonusInterval) / 1000).toInt() - 1) // 1-10 сек
+        sbRoundDuration.progress = ((sharedPreferences.getLong("gameDuration", defaultDuration) / 10000).toInt() - 6) // 60-120 сек
 
-
+        // Обновление текста и сохранение значений при изменении
         sbMaxCockroaches.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 tvMaxCockroaches.text = "Макс. жуков: $progress"
@@ -54,8 +54,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         sbSpeed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val speedDuration = 10000L - (progress * 900L)
-                tvSpeed.text = "Скорость: ${progress} сек"
+                val speedDuration = 10000L - (progress * 900L) // 10000 ms (10 сек) при 0, 1000 ms (1 сек) при 10
+                tvSpeed.text = "Скорость: ${progress} (1-${10 - progress / 10.0} сек)"
                 sharedPreferences.edit().putLong("bugSpeed", speedDuration).apply()
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -64,7 +64,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         sbBonusInterval.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val interval = (progress + 1) * 1000L
+                val interval = (progress + 1) * 1000L // 1000-10000 мс
                 tvBonusInterval.text = "Интервал бонусов: ${interval / 1000} сек"
                 sharedPreferences.edit().putLong("bonusInterval", interval).apply()
             }
@@ -74,7 +74,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         sbRoundDuration.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val duration = (progress + 6) * 10000L
+                val duration = (progress + 6) * 10000L // 60000-120000 мс
                 tvRoundDuration.text = "Длительность: ${duration / 1000} сек"
                 sharedPreferences.edit().putLong("gameDuration", duration).apply()
             }
@@ -82,9 +82,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-
+        // Инициализация текста
         tvMaxCockroaches.text = "Макс. жуков: ${sbMaxCockroaches.progress}"
-        tvSpeed.text = "Скорость: ${sbSpeed.progress} сек"
+        tvSpeed.text = "Скорость: ${sbSpeed.progress} (1-${(10000L - sbSpeed.progress * 900L) / 1000.0} сек)"
         tvBonusInterval.text = "Интервал бонусов: ${sbBonusInterval.progress + 1} сек"
         tvRoundDuration.text = "Длительность: ${sbRoundDuration.progress + 6} сек"
     }
